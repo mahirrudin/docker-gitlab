@@ -29,3 +29,19 @@ gitlab-web       /assets/wrapper                  Up (healthy)   0.0.0.0:2222->2
 Open browser `http://localhost:8080`, login with `root` and set for the password. You must copy runner token, and add to `script/runner-register.sh`
 
 ![](runner-token.png)
+
+```
+#!/bin/sh
+# Get the registration token from:
+# http://localhost:8080/root/${project}/settings/ci_cd
+
+registration_token=CHANGEWITHYOURTOKEN
+
+docker exec -it gitlab-runners \
+  gitlab-runner register ....
+```
+Change `CHANGEWITHYOURTOKEN` with Runner token from gitlab. Then execute the script for registering runner.
+
+```
+script/runner-register.sh
+```
