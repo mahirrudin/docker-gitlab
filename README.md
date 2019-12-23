@@ -14,10 +14,12 @@ Gitlab-lab is docker-compose for running complete gitlab and gitlab ci. The main
 git clone --depth=1 https://github.com/mahirrudin/gitlab-lab
 cd gitlab-lab
 docker-compose up
-
+```
+```
 ## check if gitlab running
 docker-compose ps
-
+```
+```
      Name                   Command                  State                             Ports
 -------------------------------------------------------------------------------------------------------------------
 gitlab-runners   /usr/bin/dumb-init /entryp ...   Up
