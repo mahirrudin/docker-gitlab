@@ -13,3 +13,10 @@
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
+
+# Gitlab directories
+gitlab-config/
+gitlab-logs/
+gitlab-data/
+gitlab-runner-config/
+

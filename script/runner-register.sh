@@ -1,6 +1,5 @@
 #!/bin/sh
-# Get the registration token from:
-# http://localhost:8080/root/${project}/settings/ci_cd
+# Get the registration token from gitlab admin web
 
 registration_token=CHANGEWITHYOURTOKEN
 
