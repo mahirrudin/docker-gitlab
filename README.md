@@ -5,6 +5,7 @@ Gitlab-lab is docker-compose for running complete gitlab and gitlab ci. The main
 1. Docker
 2. Docker compose
 3. Internet connection
+4. TCP Port 2222, 8080, 4567, 443 (or change by yourself in the docker-compose.yml)
 
 ## Setup
 
