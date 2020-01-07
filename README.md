@@ -5,7 +5,7 @@ Gitlab-lab is docker-compose for running complete gitlab and gitlab ci. The main
 1. Docker
 2. Docker compose
 3. Internet connection
-4. TCP Port 2222, 9080, 4567, 9443 (or change by yourself in the docker-compose.yml)
+4. TCP Port 2222, 8080, 4567, 8443 (or change by yourself in the docker-compose.yml)
 
 ## Setup
 
@@ -23,8 +23,8 @@ docker-compose ps
      Name                   Command                  State                             Ports
 -------------------------------------------------------------------------------------------------------------------
 gitlab-runners   /usr/bin/dumb-init /entryp ...   Up
-gitlab-web       /assets/wrapper                  Up (healthy)   0.0.0.0:2222->22/tcp, 0.0.0.0:9443->443/tcp,
-                                                                 0.0.0.0:4567->4567/tcp, 0.0.0.0:9080->80/tcp
+gitlab-web       /assets/wrapper                  Up (healthy)   0.0.0.0:2222->22/tcp, 0.0.0.0:8443->443/tcp,
+                                                                 0.0.0.0:4567->4567/tcp, 0.0.0.0:8080->80/tcp
 ```
 Open browser `http://localhost:8080`, login with `root` and set for the password. You must copy runner token, and add to `script/runner-register.sh`
 
