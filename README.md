@@ -22,7 +22,7 @@ docker-compose ps
 ```
      Name                   Command                  State                             Ports
 -------------------------------------------------------------------------------------------------------------------
-gitlab-runners   /usr/bin/dumb-init /entryp ...   Up
+gitlab-runner   /usr/bin/dumb-init /entryp ...   Up
 gitlab-web       /assets/wrapper                  Up (healthy)   0.0.0.0:2222->22/tcp, 0.0.0.0:8443->443/tcp,
                                                                  0.0.0.0:4567->4567/tcp, 0.0.0.0:8080->80/tcp
 ```
@@ -43,5 +43,9 @@ docker exec -it gitlab-runners \
 Change `CHANGEWITHYOURTOKEN` with Runner token from gitlab. Then execute the script for registering runner.
 
 ```
+# for linux
 script/runner-register.sh
+
+# for windows
+script/runner-register.bat
 ```
