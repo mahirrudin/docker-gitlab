@@ -1,5 +1,26 @@
 version: '3.7'
 
+networks:
+  gitlab-network:
+    name: gitlab-network
+    ipam:
+      config:
+        - subnet: 10.0.85.0/24
+
+volumes:
+  gitlab-cfg:
+    name: gitlab-cfg
+    external: false
+  gitlab-log:
+    name: gitlab-log
+    external: false
+  gitlab-opt:
+    name: gitlab-opt
+    external: false
+  runner-data:
+    name: runner-data
+    external: false
+
 services:
   gitlab-web:
     image: gitlab/gitlab-ee:latest
@@ -7,9 +28,9 @@ services:
     hostname: gitlab.devsecops.lab
     volumes:
       - './hosts:/etc/hosts'
-      - './gitlab-config:/etc/gitlab'
-      - './gitlab-logs:/var/log/gitlab'
-      - './gitlab-data:/var/opt/gitlab'
+      - 'gitlab-cfg:/etc/gitlab'
+      - 'gitlab-log:/var/log/gitlab'
+      - 'gitlab-opt:/var/opt/gitlab'
     ports:
       - '2222:22'
       - '8080:80'
@@ -18,12 +39,12 @@ services:
     environment:
       GITLAB_OMNIBUS_CONFIG: |
         gitlab_rails['gitlab_shell_ssh_port'] = 2222
-        registry_external_url 'http://localhost:4567'
+        registry_external_url 'http://gitlab.devsecops.lab:4567'
         registry['enable'] = true
         unicorn['socket'] = '/opt/gitlab/var/unicorn/gitlab.socket'
     networks:
       gitlab-network:
-         ipv4_address: 10.0.80.10
+         ipv4_address: 10.0.85.10
 
   gitlab-runners:
     image: gitlab/gitlab-runner:latest
@@ -31,15 +52,9 @@ services:
     hostname: runner.devsecops.lab
     volumes:
       - './hosts:/etc/hosts'
-      - './gitlab-runner-config:/etc/gitlab-runner:Z'
+      - 'runner-data:/etc/gitlab-runner:Z'
       - '/var/run/docker.sock:/var/run/docker.sock'
     networks:
       gitlab-network:
-         ipv4_address: 10.0.80.11
+         ipv4_address: 10.0.85.11
 
-networks:
-  gitlab-network:
-    name: gitlab-network
-    ipam:
-      config:
-        - subnet: 10.0.80.0/24
