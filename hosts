@@ -1,5 +1,5 @@
 127.0.0.1 	  localhost
 ::1		  localhost
 
-10.0.80.10	  gitlab.devsecops.lab
-10.0.80.11	  runner.devsecops.lab
+10.0.85.10	  gitlab.devsecops.lab
+10.0.85.11	  runner.devsecops.lab
