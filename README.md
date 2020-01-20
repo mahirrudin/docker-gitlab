@@ -20,11 +20,11 @@ docker-compose up
 docker-compose ps
 ```
 ```
-     Name                   Command                  State                             Ports
--------------------------------------------------------------------------------------------------------------------
-gitlab-runner   /usr/bin/dumb-init /entryp ...   Up
-gitlab-web       /assets/wrapper                  Up (healthy)   0.0.0.0:2222->22/tcp, 0.0.0.0:8443->443/tcp,
-                                                                 0.0.0.0:4567->4567/tcp, 0.0.0.0:8080->80/tcp
+        Name                       Command                  State                                   Ports
+-------------------------------------------------------------------------------------------------------------------------------------
+gitlab.devsecops.lab    /assets/wrapper                  Up (healthy)   0.0.0.0:2222->22/tcp, 443/tcp, 0.0.0.0:4567->4567/tcp, 80/tcp
+runner.devsecops.lab    /usr/bin/dumb-init /entryp ...   Up
+traefik.devsecops.lab   /entrypoint.sh --log.level ...   Up             0.0.0.0:80->80/tcp, 0.0.0.0:8080->8080/tcp
 ```
 Since domain `gitlab.devsecops.lab` is not valid, you must add this on hosts file. 
 
