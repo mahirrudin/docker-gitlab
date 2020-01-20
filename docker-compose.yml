@@ -22,10 +22,35 @@ volumes:
     external: false
 
 services:
-  gitlab-web:
+  traefik:
+    image: "traefik:latest"
+    container_name: "traefik.devsecops.lab"
+    hostname: traefik.devsecops.lab
+    command:
+      - "--log.level=DEBUG"
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.http.address=:80"
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    networks:
+      gitlab-network:
+         ipv4_address: 10.0.85.5
+         
+  gitlab:
     image: gitlab/gitlab-ee:latest
     container_name: gitlab.devsecops.lab
     hostname: gitlab.devsecops.lab
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.gitlab.entrypoints=http"
+      - "traefik.http.routers.gitlab.rule=Host(`gitlab.devsecops.lab`)"
+      - "traefik.http.routers.gitlab.service=gitlab"
+      - "traefik.http.services.gitlab.loadbalancer.server.port=80"
     volumes:
       - './hosts:/etc/hosts'
       - 'gitlab-cfg:/etc/gitlab'
@@ -33,11 +58,11 @@ services:
       - 'gitlab-opt:/var/opt/gitlab'
     ports:
       - '2222:22'
-      - '8080:80'
-      - '8443:443'
       - '4567:4567'
     environment:
       GITLAB_OMNIBUS_CONFIG: |
+        external_url 'http://gitlab.devsecops.lab'
+        nginx['listen_port'] = 80    
         gitlab_rails['gitlab_shell_ssh_port'] = 2222
         registry_external_url 'http://gitlab.devsecops.lab:4567'
         registry['enable'] = true
@@ -46,8 +71,8 @@ services:
       gitlab-network:
          ipv4_address: 10.0.85.10
 
-  gitlab-runners:
-    image: gitlab/gitlab-runner:latest
+  runner:
+    image: gitlab/gitlab-runner:alpine
     container_name: runner.devsecops.lab
     hostname: runner.devsecops.lab
     volumes:
