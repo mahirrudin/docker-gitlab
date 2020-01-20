@@ -1,7 +1,7 @@
 #!/bin/sh
 # Get the registration token from gitlab admin web
 
-registration_token=CHANGEWITHYOURTOKEN
+read -p "Runner Token : " registration_token 
 
 docker exec -it gitlab-runner \
   gitlab-runner register \
