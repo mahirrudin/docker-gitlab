@@ -26,7 +26,14 @@ gitlab-runner   /usr/bin/dumb-init /entryp ...   Up
 gitlab-web       /assets/wrapper                  Up (healthy)   0.0.0.0:2222->22/tcp, 0.0.0.0:8443->443/tcp,
                                                                  0.0.0.0:4567->4567/tcp, 0.0.0.0:8080->80/tcp
 ```
-Open browser `http://localhost:8080`, login with `root` and set for the password. You must copy runner token, and add to `script/runner-register.sh`
+Since domain `gitlab.devsecops.lab` is not valid, you must add this on hosts file. 
+
+```
+# For Windows -> C:\Windows\System32\drivers\etc\hosts
+# For Linux/Mac -> /etc/hosts
+127.0.0.10	gitlab.devsecops.lab
+```
+Access via browser http://gitlab.devsecops.lab, login with `root` and set for the password. Then copy runner token.
 
 ![](runner-token.png)
 
@@ -39,11 +46,4 @@ script/runner-register.sh
 # for windows
 script/runner-register.bat
 ```
-Since domain `gitlab.devsecops.lab` is not valid, you must add this on hosts file. 
 
-```
-# For Windows -> C:\Windows\System32\drivers\etc\hosts
-# For Linux/Mac -> /etc/hosts
-127.0.0.10	gitlab.devsecops.lab
-```
-Access via browser http://gitlab.devsecops.lab
