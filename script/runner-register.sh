@@ -3,7 +3,7 @@
 
 registration_token=CHANGEWITHYOURTOKEN
 
-docker exec -it gitlab-runners \
+docker exec -it gitlab-runner \
   gitlab-runner register \
     --non-interactive \
     --registration-token ${registration_token} \
