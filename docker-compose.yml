@@ -24,7 +24,7 @@ volumes:
 services:
   gitlab-web:
     image: gitlab/gitlab-ee:latest
-    container_name: gitlab-web
+    container_name: gitlab.devsecops.lab
     hostname: gitlab.devsecops.lab
     volumes:
       - './hosts:/etc/hosts'
@@ -48,7 +48,7 @@ services:
 
   gitlab-runners:
     image: gitlab/gitlab-runner:latest
-    container_name: gitlab-runner
+    container_name: runner.devsecops.lab
     hostname: runner.devsecops.lab
     volumes:
       - './hosts:/etc/hosts'
