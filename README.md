@@ -30,17 +30,7 @@ Open browser `http://localhost:8080`, login with `root` and set for the password
 
 ![](runner-token.png)
 
-```
-#!/bin/sh
-# Get the registration token from:
-# http://localhost:8080/root/${project}/settings/ci_cd
-
-registration_token=CHANGEWITHYOURTOKEN
-
-docker exec -it gitlab-runners \
-  gitlab-runner register ....
-```
-Change `CHANGEWITHYOURTOKEN` with Runner token from gitlab. Then execute the script for registering runner.
+Execute the script for registering runner, and put gitlab runner token.
 
 ```
 # for linux
