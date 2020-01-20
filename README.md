@@ -39,3 +39,11 @@ script/runner-register.sh
 # for windows
 script/runner-register.bat
 ```
+Since domain `gitlab.devsecops.lab` is not valid, you must add this on hosts file. 
+
+```
+# For Windows -> C:\Windows\System32\drivers\etc\hosts
+# For Linux/Mac -> /etc/hosts
+127.0.0.10	gitlab.devsecops.lab
+```
+Access via browser http://gitlab.devsecops.lab
