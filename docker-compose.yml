@@ -68,7 +68,7 @@ services:
     environment:
       GITLAB_OMNIBUS_CONFIG: |
         nginx['listen_port'] = 80 
-        external_url 'http://gitlab.devsecops.lab'
+        external_url 'https://gitlab.devsecops.lab'
         gitlab_root_email='administrator@devsecops.lab' 
         gitlab_root_password="developmentonly"   
         gitlab_rails['gitlab_shell_ssh_port'] = 2222
