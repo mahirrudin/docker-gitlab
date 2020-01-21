@@ -3,7 +3,7 @@
 
 read -p "Runner Token : " registration_token 
 
-docker exec -it gitlab-runner \
+docker exec -it runner.devsecops.lab \
   gitlab-runner register \
     --non-interactive \
     --registration-token ${registration_token} \
