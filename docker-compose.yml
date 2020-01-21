@@ -1,8 +1,8 @@
 version: '3.7'
 
 networks:
-  gitlab-network:
-    name: gitlab-network
+  devsecops:
+    name: devsecops
     ipam:
       config:
         - subnet: 10.0.85.0/24
@@ -23,6 +23,7 @@ volumes:
 
 services:
   traefik:
+    # image: "traefik@sha256:b45214fe976f562a2960b31d651937ff0b38096a5e190aa054ccd0d731c6999f"
     image: "traefik:latest"
     container_name: "traefik.devsecops.lab"
     hostname: traefik.devsecops.lab
@@ -38,10 +39,11 @@ services:
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
     networks:
-      gitlab-network:
+      devsecops:
          ipv4_address: 10.0.85.5
          
   gitlab:
+    # image: gitlab/gitlab-ee@sha256:cc9f61079b4a1f0cc12d40cbd3427bb7585409d6730e56987180ac6bccf04ef8
     image: gitlab/gitlab-ee:latest
     container_name: gitlab.devsecops.lab
     hostname: gitlab.devsecops.lab
@@ -61,17 +63,20 @@ services:
       - '4567:4567'
     environment:
       GITLAB_OMNIBUS_CONFIG: |
+        nginx['listen_port'] = 80 
         external_url 'http://gitlab.devsecops.lab'
-        nginx['listen_port'] = 80    
+        gitlab_root_email='administrator@devsecops.lab' 
+        gitlab_root_password="developmentonly"   
         gitlab_rails['gitlab_shell_ssh_port'] = 2222
         registry_external_url 'http://gitlab.devsecops.lab:4567'
         registry['enable'] = true
         unicorn['socket'] = '/opt/gitlab/var/unicorn/gitlab.socket'
     networks:
-      gitlab-network:
+      devsecops:
          ipv4_address: 10.0.85.10
 
   runner:
+    # image: gitlab/gitlab-runner@sha256:fa5da5099bb9e952411827dcc26eb1f02128d6528596f13c75736fc33d5bd245
     image: gitlab/gitlab-runner:alpine
     container_name: runner.devsecops.lab
     hostname: runner.devsecops.lab
@@ -80,6 +85,6 @@ services:
       - 'runner-data:/etc/gitlab-runner:Z'
       - '/var/run/docker.sock:/var/run/docker.sock'
     networks:
-      gitlab-network:
+      devsecops:
          ipv4_address: 10.0.85.11
 
