@@ -33,10 +33,8 @@ services:
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
       - "--entrypoints.http.address=:80"
-      - "--entrypoints.https.address=:443"
     ports:
       - "80:80"
-      - "443:443"
       - "8080:8080"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
@@ -52,11 +50,9 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.gitlab.entrypoints=http"
-      - "traefik.http.routers.gitlab.entrypoints=https"
       - "traefik.http.routers.gitlab.rule=Host(`gitlab.devsecops.lab`)"
       - "traefik.http.routers.gitlab.service=gitlab"
       - "traefik.http.services.gitlab.loadbalancer.server.port=80"
-      - "traefik.http.services.gitlab.loadbalancer.server.port=443"
     volumes:
       - './hosts:/etc/hosts'
       - 'gitlab-cfg:/etc/gitlab'
@@ -68,7 +64,7 @@ services:
     environment:
       GITLAB_OMNIBUS_CONFIG: |
         nginx['listen_port'] = 80 
-        external_url 'https://gitlab.devsecops.lab'
+        external_url 'http://gitlab.devsecops.lab'
         gitlab_root_email='administrator@devsecops.lab' 
         gitlab_root_password="developmentonly"   
         gitlab_rails['gitlab_shell_ssh_port'] = 2222
