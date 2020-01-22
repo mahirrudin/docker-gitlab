@@ -1,6 +1,6 @@
 127.0.0.1 	  localhost
 ::1		  localhost
 
-10.0.85.5     traefik.devsecops.lab
+10.0.85.5	  traefik.devsecops.lab
 10.0.85.10	  gitlab.devsecops.lab
 10.0.85.11	  runner.devsecops.lab
