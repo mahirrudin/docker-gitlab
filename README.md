@@ -1,5 +1,5 @@
-# Gitlab-Lab
-Gitlab-lab is docker-compose for running complete gitlab and gitlab ci. The main purpose is to simulate gitlab on development computer, so engineer free to do anything without fear of crashing production server.
+# DOCKER-GITLAB
+docker-gitlab is docker-compose for running complete gitlab and gitlab ci. The main purpose is to simulate gitlab on development computer, so engineer free to do anything without fear of crashing production server.
 
 ## Requirements
 1. Docker
