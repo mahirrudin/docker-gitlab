@@ -23,7 +23,6 @@ volumes:
 
 services:
   traefik:
-    # image: "traefik@sha256:b45214fe976f562a2960b31d651937ff0b38096a5e190aa054ccd0d731c6999f"
     image: "traefik:latest"
     container_name: "traefik.devsecops.lab"
     hostname: traefik.devsecops.lab
@@ -43,8 +42,7 @@ services:
          ipv4_address: 10.0.85.5
          
   gitlab:
-    # image: gitlab/gitlab-ee@sha256:cc9f61079b4a1f0cc12d40cbd3427bb7585409d6730e56987180ac6bccf04ef8
-    image: gitlab/gitlab-ee:latest
+    image: gitlab/gitlab-ce:latest
     container_name: gitlab.devsecops.lab
     hostname: gitlab.devsecops.lab
     labels:
@@ -66,15 +64,15 @@ services:
         nginx['listen_port'] = 80 
         external_url 'http://gitlab.devsecops.lab'
         gitlab_rails['gitlab_shell_ssh_port'] = 2222
+        gitlab_rails['initial_root_password'] = 'notforproduction'
+        gitlab_rails['initial_shared_runners_registration_token'] = 'notforproduction'
         registry_external_url 'http://gitlab.devsecops.lab:4567'
         registry['enable'] = true
-        unicorn['socket'] = '/opt/gitlab/var/unicorn/gitlab.socket'
     networks:
       devsecops:
          ipv4_address: 10.0.85.10
 
   runner:
-    # image: gitlab/gitlab-runner@sha256:fa5da5099bb9e952411827dcc26eb1f02128d6528596f13c75736fc33d5bd245
     image: gitlab/gitlab-runner:alpine
     container_name: runner.devsecops.lab
     hostname: runner.devsecops.lab
