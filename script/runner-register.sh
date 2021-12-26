@@ -6,8 +6,8 @@ until $(curl --output /dev/null --silent --head --fail http://gitlab.devsecops.l
     printf '.'
     sleep 5
 done
-echo 'Input your runner registration token : '
-read -p registration_token 
+echo .
+read -p 'Input your runner registration token : ' registration_token 
 
 docker exec -it runner.devsecops.lab \
   gitlab-runner register \
