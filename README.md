@@ -33,7 +33,7 @@ Since domain `gitlab.devsecops.lab` is not valid, you must add this on hosts fil
 # For Linux/Mac -> /etc/hosts
 127.0.0.10	gitlab.devsecops.lab
 ```
-Access via browser http://gitlab.devsecops.lab, login with `root` and set for the password. Then copy runner token.
+Access via browser http://gitlab.devsecops.lab, login with `root` and set for the password. For easy development process, there was hardcoded login and token registration secret in `docker-compose.yml`. The secret is `notforproduction`, and yes you should not use the same configuration on production.
 
 ![](runner-token.png)
 
