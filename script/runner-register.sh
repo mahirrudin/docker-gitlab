@@ -1,7 +1,13 @@
 #!/bin/sh
 # Get the registration token from gitlab admin web
 
-read -p "Runner Token : " registration_token 
+printf 'Wait for gitlab server up and run .'
+until $(curl --output /dev/null --silent --head --fail http://gitlab.devsecops.lab); do
+    printf '.'
+    sleep 5
+done
+echo 'Input your runner registration token : '
+read -p registration_token 
 
 docker exec -it runner.devsecops.lab \
   gitlab-runner register \
